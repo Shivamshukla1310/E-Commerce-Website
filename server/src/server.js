@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -27,3 +28,5 @@ const PORT = process.env.PORT || 8080;
   await connectDB(process.env.MONGO_URI || "mongodb://127.0.0.1:27017");
   app.listen(PORT, () => console.log(`🚀 API http://localhost:${PORT}`));
 })();
+
+app.use("/api/auth", authRoutes);
